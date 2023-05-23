@@ -14,6 +14,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 // import components:
 import BackButton from '../components/BackButton.js'
+import RingSelectButton from '../components/RingSelectButton.js'
 import VTOButton from '../components/VTOButton.js'
 
 // import main script:
@@ -46,7 +47,6 @@ let _earrings3DHelper = null
 // just used to get the Camera and the renderer used by React-fiber:
 const ThreeGrabber = (props) => {
   const threeFiber = useThree()
-  console.log(threeFiber);
   useFrame(_earrings3DHelper.update_threeCamera.bind(null, props.sizing, threeFiber.camera))
   threeFiber.gl.setPixelRatio(window.devicePixelRatio || 1)
 
@@ -141,6 +141,16 @@ const Earrings3D = (props) => {
   const [GLTFModelLeft, setModelLeft] = useState(GLTFEarringsModel_1)
   const [isInitialized] = useState(true)
 
+  const setModel = (id) => {
+    const earRingList = [
+      GLTFEarringsModel_1,
+      GLTFEarringsModel_2,
+      GLTFEarringsModel_3,
+    ]
+    setModelRight(earRingList[id]);
+    setModelLeft(earRingList[id]);
+  }
+
   // refs:
   const canvasFaceRef = useRef()
 
@@ -217,7 +227,6 @@ const Earrings3D = (props) => {
     return WEBARROCKSFACE.destroy
   }, [isInitialized])
 
-  
   return (
     <div>
       {/* Canvas managed by three fiber, for AR: */}
@@ -256,10 +265,9 @@ const Earrings3D = (props) => {
       }} width = {sizing.width} height = {sizing.height} />
 
       <BackButton />
-
+      <RingSelectButton setModel={setModel} />
     </div>
   )
-
 } 
 
 export default Earrings3D

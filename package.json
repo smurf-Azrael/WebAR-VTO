@@ -44,9 +44,14 @@
     "url": "git@github.com:WebAR-rocks/WebAR.rocks.face"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@iconify/react": "^4.1.0",
+    "@mui/material": "^5.13.2",
     "@react-three/fiber": "^7.0.20",
     "@react-three/postprocessing": "^2.0.3",
     "@tweenjs/tween.js": "^18.6.4",
+    "iconify": "^1.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
