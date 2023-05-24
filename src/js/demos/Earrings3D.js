@@ -35,6 +35,25 @@ import lightingHelper from '../contrib/WebARRocksFace/helpers/WebARRocksFaceLigh
 import GLTFEarringsModel_1 from '../../assets/earrings3D/1.glb'
 import GLTFEarringsModel_2 from '../../assets/earrings3D/2.glb'
 import GLTFEarringsModel_3 from '../../assets/earrings3D/3.glb'
+import ringPath1 from '../../assets/img/rings/1.jpg';
+import ringPath2 from '../../assets/img/rings/2.jpg';
+import ringPath3 from '../../assets/img/rings/3.jpg';
+
+const images = [
+  {
+    id: 0,
+    url: ringPath1
+  },
+  {
+    id: 1,
+    url: ringPath2
+  },
+  {
+    id: 2,
+    url: ringPath3
+  },
+];
+
 
 // import envMap:
 import envMap from '../../assets/earrings3D/venice_sunset_512.hdr'
@@ -265,9 +284,12 @@ const Earrings3D = (props) => {
       }} width = {sizing.width} height = {sizing.height} />
 
       <BackButton />
-      <RingSelectButton setModel={setModel} />
+      <RingSelectButton
+        setModel={setModel}
+        images={images}
+      />
     </div>
   )
-} 
+}
 
 export default Earrings3D
