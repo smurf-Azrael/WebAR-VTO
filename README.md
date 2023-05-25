@@ -1,5 +1,5 @@
 # Virtual Try On
 
 ## Real-Time
-Earring
-Neckless
+- Earring
+- Neckless
