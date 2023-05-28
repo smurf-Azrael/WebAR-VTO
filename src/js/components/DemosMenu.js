@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box'; // Grid version 1
-import { AppBar } from '@mui/material';
+import { AppBar, Grid } from '@mui/material';
 
 const Start = styled(Box)(({ theme }) => ({
   textAlign: 'center',
@@ -14,12 +14,12 @@ const Start = styled(Box)(({ theme }) => ({
 const WearingButton = styled(Button)(({ theme }) => ({
   ...theme.typography.body2,
   padding: '20px 30px',
-  margin: '250px 0px',
+  margin: '250px 30px',
   textAlign: 'center',
   borderRadius: 120,
   fontSize: 30,
   backgroundColor: '#6666dd',
-  outline: '12px solid #6666dd80'
+  outline: '12bpx solid #6666dd80'
 }));
 
 const Title = styled(AppBar)(({ theme }) => ({
@@ -39,6 +39,9 @@ export default function DemoMenu() {
   return (
     <Start className='demoMenusContent' sx={{ width: '100%' }}>
       <Title>Virtual Try-On</Title>
+      <WearingButton href='/necklace3D' variant='contained' >Necklace</WearingButton>
+      <WearingButton href='/necklace3D' variant='contained' >Necklace</WearingButton>
+      <WearingButton href='/earrings3D' variant='contained' >Earring</WearingButton>
       <WearingButton href='/earrings3D' variant='contained' >Earring</WearingButton>
     </Start>
   );

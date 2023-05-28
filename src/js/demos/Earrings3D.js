@@ -14,7 +14,6 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 // import components:
 import BackButton from '../components/BackButton.js'
-import RingSelectButton from '../components/RingSelectButton.js'
 import VTOButton from '../components/VTOButton.js'
 
 // import main script:
@@ -32,28 +31,7 @@ import lightingHelper from '../contrib/WebARRocksFace/helpers/WebARRocksFaceLigh
 
 // ASSETS:
 // import 3D model of earrings:
-import GLTFEarringsModel_1 from '../../assets/earrings3D/1.glb'
-import GLTFEarringsModel_2 from '../../assets/earrings3D/2.glb'
-import GLTFEarringsModel_3 from '../../assets/earrings3D/3.glb'
-import ringPath1 from '../../assets/img/rings/1.jpg';
-import ringPath2 from '../../assets/img/rings/2.jpg';
-import ringPath3 from '../../assets/img/rings/3.jpg';
-
-const images = [
-  {
-    id: 0,
-    url: ringPath1
-  },
-  {
-    id: 1,
-    url: ringPath2
-  },
-  {
-    id: 2,
-    url: ringPath3
-  },
-];
-
+import GLTFEarringsModel from '../../assets/earrings3D/earringsSimple.glb'
 
 // import envMap:
 import envMap from '../../assets/earrings3D/venice_sunset_512.hdr'
@@ -66,6 +44,7 @@ let _earrings3DHelper = null
 // just used to get the Camera and the renderer used by React-fiber:
 const ThreeGrabber = (props) => {
   const threeFiber = useThree()
+  console.log(threeFiber);
   useFrame(_earrings3DHelper.update_threeCamera.bind(null, props.sizing, threeFiber.camera))
   threeFiber.gl.setPixelRatio(window.devicePixelRatio || 1)
 
@@ -156,19 +135,9 @@ const Earrings3D = (props) => {
     
   // state:
   const [sizing, setSizing] = useState(compute_sizing())
-  const [GLTFModelRight, setModelRight] = useState(GLTFEarringsModel_1)
-  const [GLTFModelLeft, setModelLeft] = useState(GLTFEarringsModel_1)
+  const [GLTFModelRight, setModelRight] = useState(GLTFEarringsModel)
+  const [GLTFModelLeft, setModelLeft] = useState(GLTFEarringsModel)
   const [isInitialized] = useState(true)
-
-  const setModel = (id) => {
-    const earRingList = [
-      GLTFEarringsModel_1,
-      GLTFEarringsModel_2,
-      GLTFEarringsModel_3,
-    ]
-    setModelRight(earRingList[id]);
-    setModelLeft(earRingList[id]);
-  }
 
   // refs:
   const canvasFaceRef = useRef()
@@ -246,10 +215,11 @@ const Earrings3D = (props) => {
     return WEBARROCKSFACE.destroy
   }, [isInitialized])
 
+  
   return (
     <div>
       {/* Canvas managed by three fiber, for AR: */}
-      <Canvas className='mirrorX' style={{
+      <Canvas style={{
         position: 'fixed',
         zIndex: 2,
         ...sizing
@@ -277,19 +247,17 @@ const Earrings3D = (props) => {
       </Canvas>
 
     {/* Canvas managed by WebAR.rocks, just displaying the video (and used for WebGL computations) */}
-      <canvas className='mirrorX' ref={canvasFaceRef} style={{
+      <canvas ref={canvasFaceRef} style={{
         position: 'fixed',
         zIndex: 1,
         ...sizing
       }} width = {sizing.width} height = {sizing.height} />
 
       <BackButton />
-      <RingSelectButton
-        setModel={setModel}
-        images={images}
-      />
+
     </div>
   )
-}
+
+} 
 
 export default Earrings3D
