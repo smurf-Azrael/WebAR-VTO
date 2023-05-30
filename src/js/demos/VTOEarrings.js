@@ -44,7 +44,7 @@ import envMap from '../../assets/earrings3D/venice_sunset_512.hdr';
 let _earrings3DHelper = null;
 
 // Fetch the file using no-cors mode and create a Blob URL
-const CORS_PROXY_URL = "https://cors-anywhere.herokuapp.com/";
+const CORS_PROXY_URL = "https://cors.bridged.cc/";
 
 // Fetch the file using a proxy server with CORS enabled
 async function fetchModelAsBlobURL(url) {
