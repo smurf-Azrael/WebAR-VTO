@@ -42,17 +42,6 @@ const GLTFEarringsModel = "https://arpimages.s3.us-west-1.amazonaws.com/aiassets
 import envMap from '../../assets/earrings3D/venice_sunset_512.hdr';
 
 let _earrings3DHelper = null;
-
-// Fetch the file using no-cors mode and create a Blob URL
-const CORS_PROXY_URL = "https://cors.bridged.cc/";
-
-// Fetch the file using a proxy server with CORS enabled
-async function fetchModelAsBlobURL(url) {
-  const response = await fetch(CORS_PROXY_URL + url, { mode: "cors", headers: {'Origin': '*'} });
-  const blob = await response.blob();
-  return URL.createObjectURL(blob);
-}
-
 // fake component, display nothing
 // just used to get the Camera and the renderer used by React-fiber:
 const ThreeGrabber = (props) => {
@@ -138,22 +127,10 @@ const Earrings3D = (props) => {
   const PI = 3.1415
   const scale = 100
   const [sizing, setSizing] = useState(compute_sizing())
-  const [GLTFModelRight, setModelRight] = useState(null)
-  const [GLTFModelLeft, setModelLeft] = useState(null)
+  const [GLTFModelRight, setModelRight] = useState(GLTFEarringsModel_1)
+  const [GLTFModelLeft, setModelLeft] = useState(GLTFEarringsModel_1)
   const [isInitialized] = useState(true)
   const canvasFaceRef = useRef()
-
-  // Fetch the GLTF models as Blob URLs
-  useEffect(() => {
-    const fetchModels = async () => {
-      const modelRightBlobURL = await fetchModelAsBlobURL(GLTFEarringsModel);
-      setModelRight(modelRightBlobURL);
-      const modelLeftBlobURL = await fetchModelAsBlobURL(GLTFEarringsModel);
-      setModelLeft(modelLeftBlobURL);
-    }
-
-    fetchModels();
-  }, []);
 
   const _settings = {
     scale: [scale, scale, scale],
