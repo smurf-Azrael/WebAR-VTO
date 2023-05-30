@@ -48,7 +48,7 @@ const CORS_PROXY_URL = "https://cors.bridged.cc/";
 
 // Fetch the file using a proxy server with CORS enabled
 async function fetchModelAsBlobURL(url) {
-  const response = await fetch(CORS_PROXY_URL + url, { mode: "cors" });
+  const response = await fetch(CORS_PROXY_URL + url, { mode: "cors", headers: {'Origin': '*'} });
   const blob = await response.blob();
   return URL.createObjectURL(blob);
 }
