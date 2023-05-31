@@ -39,10 +39,10 @@ export default function DemoMenu() {
   return (
     <Start className='demoMenusContent' sx={{ width: '100%' }}>
       <Title>Virtual Try-On</Title>
-      <WearingButton href='/necklace3D' variant='contained' >Necklace</WearingButton>
-      <WearingButton href='/necklace3D' variant='contained' >Necklace</WearingButton>
-      <WearingButton href='/earrings3D' variant='contained' >Earring</WearingButton>
-      <WearingButton href='/earrings3D' variant='contained' >Earring</WearingButton>
+      <WearingButton href='/necklace3D/1' variant='contained' >Necklace</WearingButton>
+      <WearingButton href='/necklace3D/2' variant='contained' >Necklace</WearingButton>
+      <WearingButton href='/earrings3D/1' variant='contained' >Earring</WearingButton>
+      <WearingButton href='/earrings3D/1' variant='contained' >Earring</WearingButton>
     </Start>
   );
 }

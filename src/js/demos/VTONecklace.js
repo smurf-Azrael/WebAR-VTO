@@ -16,26 +16,12 @@ import NN from "../contrib/WebARRocksFace/neuralNets/NN_NECKLACE_6.json";
 // This helper is not minified, feel free to customize it (and submit pull requests bro):
 import mirrorHelper from "../contrib/WebARRocksFace/helpers/WebARRocksMirror.js";
 
-// ASSETS:
-// import 3D models of necklaces:
-import GLTFNecklaceModel_1 from "../../assets/necklace3D/models3D/1.glb";
-import GLTFNecklaceModel_2 from "../../assets/necklace3D/models3D/2.glb";
-import necklacePath1 from "../../assets/img/necklace/1.jpg";
-import necklacePath2 from "../../assets/img/necklace/2.jpg";
+const model_id = window.location.pathname.split('/').pop();
 
-const images = [
-  {
-    id: 0,
-    url: necklacePath1,
-  },
-  {
-    id: 1,
-    url: necklacePath2,
-  },
-];
+const GLTFNecklaceModel_1 = "https://arpimages.s3.us-west-1.amazonaws.com/aiassets/necklaces/" + `${model_id}`+ ".glb"
 
 // import occluder
-import GLTFOccluderModel from "../../assets/necklace3D/models3D/occluder.glb";
+// import GLTFOccluderModel from "../../assets/necklace3D/models3D/occluder.glb";
 
 // import envMap:
 import envMap from "../../assets/necklace3D/envmaps/venice_sunset_1k.hdr";
@@ -91,19 +77,19 @@ const VTOModelContainer = (props) => {
   const model = gltf.scene.clone();
 
   // import and create occluder:
-  const isDebugOccluder = false; // true to debug the occluder
-  const gltfOccluder = useLoader(GLTFLoader, props.GLTFOccluderModel);
-  const occluderModel = gltfOccluder.scene.clone();
-  const occluderMesh = mirrorHelper.create_occluderMesh(
-    occluderModel,
-    isDebugOccluder
-  );
+  // const isDebugOccluder = false; // true to debug the occluder
+  // const gltfOccluder = useLoader(GLTFLoader, props.GLTFOccluderModel);
+  // const occluderModel = gltfOccluder.scene.clone();
+  // const occluderMesh = mirrorHelper.create_occluderMesh(
+  //   occluderModel,
+  //   isDebugOccluder
+  // );
 
   return (
     <object3D ref={objRef}>
       <object3D>
         <primitive object={model} />
-        <primitive object={occluderMesh} />
+        {/* <primitive object={occluderMesh} /> */}
       </object3D>
     </object3D>
   );
@@ -150,7 +136,7 @@ const VTONecklace = (props) => {
     },
 
     // occluder 3D model:
-    GLTFOccluderModel,
+    // GLTFOccluderModel,
   };
   let _timerResize = null;
   let _isPaused = false;
@@ -280,7 +266,7 @@ const VTONecklace = (props) => {
         <Suspense fallback={<DebugCube />}>
           <VTOModelContainer
             GLTFModel={model}
-            GLTFOccluderModel={_settings.GLTFOccluderModel}
+            // GLTFOccluderModel={_settings.GLTFOccluderModel}
             faceIndex={0}
             sizing={sizing}
           />
@@ -301,7 +287,6 @@ const VTONecklace = (props) => {
       />
 
       <BackButton />
-      <ChooseButton setModel={changeModel} images={images} />
       <VTOButton onClick={capture_image}>Capture</VTOButton>
       {/* <div className="VTOButtons">
         <VTOButton onClick={setModel.bind(null, GLTFNecklaceModel_1)}>Black Panther</VTOButton>
