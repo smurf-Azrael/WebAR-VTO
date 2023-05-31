@@ -14,10 +14,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 // import components:
 import BackButton from '../components/BackButton.js'
-import ChooseButton from '../components/ChooseButton.js'
-import VTOButton from "../components/VTOButton.js";
-
-// import main script:
+import VTOButton from '../components/VTOButton.js'
 import WEBARROCKSFACE from '../contrib/WebARRocksFace/dist/WebARRocksFace.module.js'
 
 // import neural network model:
@@ -31,7 +28,8 @@ import earrings3DHelper from '../contrib/WebARRocksFace/helpers/WebARRocksFaceEa
 import lightingHelper from '../contrib/WebARRocksFace/helpers/WebARRocksFaceLightingHelper.js'
 // ASSETS:
 // import 3D model of earrings:
-const GLTFEarringsModel_1 = 'https://arpimages.s3.us-west-1.amazonaws.com/aiassets/1.glb' // '../../assets/earrings3D/1.glb'
+const model_id = window.location.pathname.split('/').pop();
+const GLTFEarringsModel_1 = "https://arpimages.s3.us-west-1.amazonaws.com/aiassets/" + `${model_id}`+ ".glb";// '../../assets/earrings3D/1.glb'
 // import GLTFEarringsModel_2 from '../../assets/earrings3D/2.glb'
 // import GLTFEarringsModel_3 from '../../assets/earrings3D/3.glb'
 // import ringPath1 from '../../assets/img/rings/1.jpg';
@@ -132,6 +130,52 @@ const Earrings3D = (props) => {
   const [isInitialized] = useState(true)
   const canvasFaceRef = useRef()
 
+  const capture_image = () => {
+    // const button = document.querySelector("#screenshot-button");
+    // button.addEventListener("click", async () => {
+    const canvas_earring = document.querySelectorAll("canvas").item(0);
+    const canvas_camera = document.querySelectorAll("canvas").item(1);
+
+    // Set the dimensions of the combined canvas to be the max of the two canvases
+    const combinedWidth = Math.max(canvas_earring.width, canvas_camera.width);
+    const combinedHeight = Math.max(
+      canvas_earring.height,
+      canvas_camera.height
+    );
+
+    const canvas_capture = document.createElement("canvas");
+    canvas_capture.width = combinedWidth;
+    canvas_capture.height = combinedHeight;
+
+    const ctx3 = canvas_capture.getContext("2d");
+    ctx3.drawImage(canvas_camera, 0, 0, combinedWidth, combinedHeight);
+    ctx3.drawImage(canvas_earring, 0, 0, combinedWidth, combinedHeight);
+
+    // Reverse the canvas horizontally
+    ctx3.translate(canvas_capture.width, 0);
+    ctx3.scale(-1, 1);
+
+    // Draw the horizontally reversed canvas onto the combined canvas
+    ctx3.drawImage(
+      canvas_capture,
+      0,
+      0,
+      canvas_capture.width,
+      canvas_capture.height,
+      0,
+      0,
+      canvas_capture.width,
+      canvas_capture.height
+    );
+
+    const link = document.createElement("a");
+    link.download = "screenshot.png";
+    link.href = canvas_capture.toDataURL();
+    link.click();
+    // });
+  };
+
+ 
   const _settings = {
     scale: [scale, scale, scale],
     lighting: {
@@ -227,6 +271,7 @@ const Earrings3D = (props) => {
       }} width = {sizing.width} height = {sizing.height} />
 
       <BackButton />
+      <VTOButton onClick={capture_image}>Capture</VTOButton>
     </div>
   )
 }
