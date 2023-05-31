@@ -10,7 +10,8 @@ export default React.forwardRef((props, ref) => {
     margin: 2,
     top: 2,
     right: 2,
-    position: 'fixed'
+    position: 'fixed',
+    zIndex: 1024
   }
   return (
     <IconButton color="success" sx={style} onClick={props.onClick} ref={ref}>
