@@ -6,7 +6,6 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 // import components:
 import BackButton from "../components/BackButton.js";
-import ChooseButton from "../components/ChooseButton.js";
 import VTOButton from "../components/VTOButton.js";
 
 // import neural network model:
@@ -18,13 +17,13 @@ import mirrorHelper from "../contrib/WebARRocksFace/helpers/WebARRocksMirror.js"
 
 const model_id = window.location.pathname.split('/').pop();
 
-const GLTFNecklaceModel_1 = "https://arpimages.s3.us-west-1.amazonaws.com/aiassets/necklaces/" + `${model_id}`+ ".glb"
 
 // import occluder
 // import GLTFOccluderModel from "../../assets/necklace3D/models3D/occluder.glb";
 
 // import envMap:
 import envMap from "../../assets/necklace3D/envmaps/venice_sunset_1k.hdr";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min.js";
 
 let _threeFiber = null;
 
@@ -106,6 +105,8 @@ const DebugCube = (props) => {
 };
 
 const VTONecklace = (props) => {
+  const {model_id} = useParams();
+  const GLTFNecklaceModel_1 = "https://arpimages.s3.us-west-1.amazonaws.com/aiassets/necklace3D/" + `${model_id}`+ ".glb"
   const PI = 3.1415;
   const scale = 100;
 

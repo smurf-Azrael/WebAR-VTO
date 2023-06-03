@@ -15,15 +15,11 @@ render(
     <Router>
       <Switch>
 
-        <Route path="/earrings3D/1">
+        <Route path="/earrings3D/:model_id">
           <DemoEarrings3D />
         </Route>
 
-        <Route path="/necklace3D/1">
-          <DemoNecklace3D />
-        </Route>
-
-        <Route path="/necklace3D/2">
+        <Route path="/necklace3D/:model_id">
           <DemoNecklace3D />
         </Route>
 
