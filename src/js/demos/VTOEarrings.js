@@ -29,15 +29,15 @@ import lightingHelper from '../contrib/WebARRocksFace/helpers/WebARRocksFaceLigh
 // ASSETS:
 // import 3D model of earrings:
 const model_id = window.location.pathname.split('/').pop();
-const GLTFEarringsModel_1 = "https://arpimages.s3.us-west-1.amazonaws.com/aiassets/" + `${model_id}`+ ".glb";// '../../assets/earrings3D/1.glb'
+// '../../assets/earrings3D/1.glb'
 // import GLTFEarringsModel_2 from '../../assets/earrings3D/2.glb'
 // import GLTFEarringsModel_3 from '../../assets/earrings3D/3.glb'
 // import ringPath1 from '../../assets/img/rings/1.jpg';
 // import ringPath2 from '../../assets/img/rings/2.jpg';
 // import ringPath3 from '../../assets/img/rings/3.jpg';
 
-const GLTFEarringsModel = "https://arpimages.s3.us-west-1.amazonaws.com/aiassets/1.glb";
 import envMap from '../../assets/earrings3D/venice_sunset_512.hdr';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min.js'
 
 let _earrings3DHelper = null;
 // fake component, display nothing
@@ -122,6 +122,8 @@ const DebugCube = () => {
 
 
 const Earrings3D = (props) => {
+  const {model_id} = useParams();
+  const GLTFEarringsModel_1 = "https://arpimages.s3.us-west-1.amazonaws.com/aiassets/earrings3D/" + `${model_id}`+ ".glb";
   const PI = 3.1415
   const scale = 100
   const [sizing, setSizing] = useState(compute_sizing())
